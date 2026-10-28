@@ -1,43 +1,72 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>iTECH Affiliate</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #090d0b;
-      color: #f5f7f5;
-      font-family: Arial, sans-serif;
-    }
-
-    main {
-      max-width: 680px;
-      padding: 48px 28px;
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0 0 16px;
-      color: #5cff8d;
-      font-size: clamp(2rem, 6vw, 4rem);
-    }
-
-    p {
-      color: #b9c2ba;
-      font-size: 1.1rem;
-      line-height: 1.7;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src * data: blob:; media-src * data: blob:; font-src * data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none';" />
+<title>iTECH Affiliate — Dashboard MVP</title>
+<script>(function(){
+  function memoryStorage(){
+    var data = Object.create(null);
+    return {
+      getItem: function(k){ k = String(k); return Object.prototype.hasOwnProperty.call(data, k) ? data[k] : null; },
+      setItem: function(k, v){ data[String(k)] = String(v); },
+      removeItem: function(k){ delete data[String(k)]; },
+      clear: function(){ data = Object.create(null); },
+      key: function(i){ var ks = Object.keys(data); return i < ks.length ? ks[i] : null; },
+      get length(){ return Object.keys(data).length; }
+    };
+  }
+  function install(name){
+    var ok = false;
+    try { var s = window[name]; s.getItem('__probe__'); ok = true; } catch (e) { ok = false; }
+    if (ok) return;
+    try {
+      Object.defineProperty(window, name, { value: memoryStorage(), configurable: true, writable: false });
+    } catch (e) { /* leave as-is if it cannot be redefined */ }
+  }
+  install('localStorage');
+  install('sessionStorage');
+})();</script>
+<style>
+html,body{margin:0;padding:0;}
+:root{--bg:#090e0b;--panel:#101914;--panel2:#142018;--line:#26352c;--text:#edf5ef;--muted:#8d9b91;--green:#55f58a;--green2:#25c764;--orange:#f7b955}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{display:flex;min-height:100vh}.sidebar{width:252px;background:#0c120e;border-right:1px solid var(--line);padding:28px 16px;display:flex;flex-direction:column;position:fixed;inset:0 auto 0 0;z-index:4}.brand{font-size:22px;font-weight:800;letter-spacing:-1px;display:flex;gap:9px;align-items:center;padding:0 12px 36px}.brand span span{color:var(--green)}.brand-dot{background:var(--green);width:13px;height:13px;border-radius:50%;box-shadow:0 0 18px var(--green)}nav{display:grid;gap:6px}.nav{border:0;background:transparent;color:#aeb9b0;text-align:left;border-radius:9px;padding:13px 12px;font-size:14px;cursor:pointer;display:flex;gap:13px;align-items:center}.nav b{font-size:10px;color:#657269}.nav:hover,.nav.active{background:#17241b;color:var(--text)}.nav.active{box-shadow:inset 2px 0 var(--green)}.sidebar-bottom{margin-top:auto;padding:15px 12px;color:var(--muted);display:grid;gap:14px}.status{color:#b7c1b9;font-size:12px}.status i{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;margin-right:7px;box-shadow:0 0 10px var(--green)}small{font-size:12px;color:var(--muted)}.workspace{width:calc(100% - 252px);margin-left:252px;padding:32px 42px 60px;max-width:1700px}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:29px}h1,h2,h3,p{margin:0}.eyebrow{font-weight:700;color:#77867c;font-size:10px;letter-spacing:1.3px;margin-bottom:8px}.green{color:var(--green)}h1{font-size:28px;letter-spacing:-.8px}.header-actions{display:flex;gap:10px}.primary,.ghost,.text-btn{font:inherit;border-radius:8px;cursor:pointer}.primary{border:0;background:var(--green);color:#08110b;font-weight:800;padding:11px 15px}.primary:hover{background:#78ff9f}.ghost{color:#b9c4ba;background:transparent;border:1px solid var(--line);padding:10px 12px}.menu{display:none}.hero{border:1px solid #24452f;background:linear-gradient(112deg,#13271b 0%,#101b14 55%,#0e1711 100%);border-radius:15px;padding:40px;display:flex;justify-content:space-between;min-height:230px;overflow:hidden}.hero h2{font-size:35px;letter-spacing:-1.6px;line-height:1.06;margin-bottom:14px}.hero em{color:var(--green);font-style:normal}.hero p:not(.eyebrow){color:#b7c2b9;margin-bottom:22px}.today{width:245px;background:#0c1510bb;border:1px solid #2f4836;border-radius:12px;padding:24px;align-self:center}.today p{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:1px}.today strong{display:block;font-size:48px;margin:12px 0 10px}.today strong span{font-size:20px;color:#728076}.progress{height:7px;background:#26342a;border-radius:10px;margin-bottom:10px}.progress span{display:block;height:100%;width:50%;background:var(--green);border-radius:10px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:18px 0}.stats article,.panel{border:1px solid var(--line);border-radius:12px;background:var(--panel)}.stats article{padding:20px}.stats p{font-size:13px;color:var(--muted);margin-bottom:11px}.stats strong{font-size:25px;letter-spacing:-.7px;display:block;margin-bottom:8px}.stats span{font-size:11px;color:var(--muted)}.stats .up{color:var(--green)}.grid-two{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.panel{padding:23px}.panel-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px}.panel h3{font-size:17px}.text-btn{border:0;background:transparent;color:var(--green);font-size:12px;font-weight:700}.post,.product{display:flex;align-items:center;gap:15px;border-top:1px solid var(--line);padding:15px 0}.post>div:nth-child(2),.product>div:nth-child(2){flex:1}.post b,.product b{font-size:13px}.post p,.product p{font-size:11px;margin-top:5px}.time{font-size:12px;color:var(--green);font-weight:800;width:38px}.badge{font-size:10px;font-weight:800;padding:6px 8px;border-radius:20px;white-space:nowrap}.draft{background:#3a3020;color:#f7c665}.scheduled{background:#1c3141;color:#6ebfff}.live{background:#173b26;color:#58e685}.product-icon{width:35px;height:35px;border-radius:8px;display:grid;place-items:center;background:#25382b;color:var(--green);font-weight:800}.product strong{font-size:13px;color:var(--green)}.view{display:none}.view.active{display:block}.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin:8px 0 24px}.section-head h2{font-size:30px;letter-spacing:-1px;margin-bottom:7px}.section-head p:not(.eyebrow){color:var(--muted);font-size:14px}.table-wrap{padding:0;overflow:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}th{font-size:10px;letter-spacing:1px;color:#829085;background:#111b14;padding:15px 20px}td{padding:17px 20px;border-top:1px solid var(--line);color:#c8d0ca}td b{color:var(--text);display:block}td small{margin-top:4px;display:block}.priority{border:0;color:var(--green);background:#1b3222;border-radius:5px;font-size:11px;padding:6px 8px}.calendar{padding:0;overflow:hidden}.days{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--line)}.days span{padding:17px;text-align:center;color:var(--muted);font-size:12px;border-right:1px solid var(--line)}.days b{font-size:18px;color:var(--text);display:block;margin-top:5px}.days .selected{background:#1d3121;color:var(--green)}.days .selected b{color:var(--green)}.schedule-card{display:flex;align-items:center;gap:20px;padding:21px;border-bottom:1px solid var(--line)}.schedule-card>div{flex:1}.schedule-card b{font-size:14px}.schedule-card p{font-size:12px;color:var(--muted);margin-top:5px}.schedule-time{color:var(--green);font-size:13px;font-weight:800}.composer{max-width:760px;display:grid;gap:19px}.composer label,.modal label{display:grid;gap:8px;font-size:12px;font-weight:700;color:#b8c4ba}textarea,input,select{font:inherit;background:#0a100c;border:1px solid #314236;border-radius:7px;color:var(--text);padding:11px;outline:none}textarea:focus,input:focus,select:focus{border-color:var(--green)}textarea{resize:vertical;min-height:120px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}fieldset{border:0;padding:0;display:flex;gap:20px;color:#b8c4ba;font-size:13px}legend{font-size:12px;font-weight:700;margin-bottom:10px}.generated{max-width:760px;margin-top:18px;display:none}.generated.show{display:block}.generated h3{font-size:20px;margin-bottom:12px}.generated p:not(.eyebrow){line-height:1.65;color:#b7c3b9;margin-bottom:11px}.chart{margin-top:18px}.bars{height:185px;display:flex;gap:18px;align-items:flex-end;border-bottom:1px solid var(--line);padding:0 10px}.bars i{display:block;flex:1;max-width:68px;background:linear-gradient(180deg,var(--green),#19783a);border-radius:5px 5px 0 0}.bar-labels{display:flex;justify-content:space-around;color:var(--muted);font-size:11px;padding:10px}.modal{position:fixed;inset:0;background:#030604b5;display:none;place-items:center;padding:20px;z-index:10}.modal.show{display:grid}.modal-card{width:min(460px,100%);background:#111a14;border:1px solid #36523d;border-radius:14px;padding:28px;position:relative}.modal-card h2{font-size:24px;margin-bottom:23px}.modal form{display:grid;gap:16px}.close{position:absolute;right:15px;top:12px;border:0;background:transparent;color:#b9c3bb;font-size:25px;cursor:pointer}@media(max-width:900px){.sidebar{width:210px}.workspace{margin-left:210px;width:calc(100% - 210px);padding:25px}.stats{grid-template-columns:repeat(2,1fr)}.grid-two{grid-template-columns:1fr}.hero{padding:28px}.today{display:none}}@media(max-width:650px){.sidebar{transform:translateX(-100%);transition:.2s}.sidebar.open{transform:translateX(0)}.workspace{margin:0;width:100%;padding:20px 16px}.menu{display:block;background:#17241b;border:0;color:#dbe8de;padding:10px;border-radius:7px}.header-actions .ghost{display:none}header{margin-bottom:20px}.hero{min-height:0}.hero h2{font-size:28px}.stats{grid-template-columns:1fr 1fr;gap:9px}.stats article{padding:15px}.stats strong{font-size:19px}.section-head{align-items:flex-start;gap:15px}.section-head h2{font-size:25px}.section-head .primary{font-size:12px;white-space:nowrap}.days span{padding:12px 4px;font-size:10px}.schedule-card{gap:10px;padding:16px}.schedule-card .badge{display:none}.form-grid{grid-template-columns:1fr}fieldset{flex-wrap:wrap;gap:10px}.header-actions{display:none}}
+</style>
 </head>
 <body>
-  <main>
-    <h1>iTECH Affiliate</h1>
-    <p>Hệ thống quản lý nội dung affiliate đang được xây dựng.</p>
-  </main>
+<main class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="brand-dot"></span><span>iTECH<span>Affiliate</span></span></div>
+    <nav>
+      <button class="nav active" data-view="dashboard"><b>01</b>Tổng quan</button>
+      <button class="nav" data-view="links"><b>02</b>Kho link</button>
+      <button class="nav" data-view="calendar"><b>03</b>Lịch nội dung</button>
+      <button class="nav" data-view="create"><b>04</b>Tạo nội dung</button>
+      <button class="nav" data-view="reports"><b>05</b>Báo cáo</button>
+    </nav>
+    <div class="sidebar-bottom"><div class="status"><i></i>Hệ thống hoạt động</div><small>iTECH Affiliate v0.1</small></div>
+  </aside>
+  <section class="workspace">
+    <header><button class="menu" id="menuBtn">Menu</button><div><p class="eyebrow">BẢNG ĐIỀU KHIỂN</p><h1 id="pageTitle">Tổng quan</h1></div><div class="header-actions"><button class="ghost">28/10/2026</button><button class="primary" id="quickCreate">+ Tạo nội dung</button></div></header>
+
+    <div class="view active" id="dashboard">
+      <section class="hero"><div><p class="eyebrow green">KẾ HOẠCH HÔM NAY</p><h2>Xuất bản đều đặn.<br><em>Tối ưu từng lượt nhấp.</em></h2><p>Quản lý nội dung affiliate cho Facebook, Instagram và Threads từ một nơi.</p><button class="primary" id="heroCreate">Tạo bài đăng mới</button></div><div class="today"><p>TIẾN ĐỘ HÔM NAY</p><strong>1 <span>/ 2</span></strong><div class="progress"><span></span></div><small>1 nội dung đang chờ duyệt</small></div></section>
+      <section class="stats"><article><p>Lượt nhấp link</p><strong>1,284</strong><span class="up">+18.2% so với tuần trước</span></article><article><p>Đơn hàng ghi nhận</p><strong>36</strong><span class="up">+9.4% so với tuần trước</span></article><article><p>Hoa hồng dự kiến</p><strong>1.860.000đ</strong><span class="up">+12.6% so với tuần trước</span></article><article><p>Link đang hoạt động</p><strong id="linkCount">12</strong><span>Kho link Shopee</span></article></section>
+      <section class="grid-two"><article class="panel"><div class="panel-head"><div><p class="eyebrow">LỊCH XUẤT BẢN</p><h3>Nội dung sắp tới</h3></div><button class="text-btn" data-go="calendar">Xem lịch</button></div><div class="post"><div class="time">10:30</div><div><b>Mẹo chọn sạc nhanh an toàn cho điện thoại</b><p>Facebook · Instagram · Video ngắn</p></div><span class="badge draft">Chờ duyệt</span></div><div class="post"><div class="time">19:30</div><div><b>Top 5 ốp lưng chống sốc đáng mua</b><p>Facebook · Threads · Carousel</p></div><span class="badge scheduled">Đã lên lịch</span></div></article><article class="panel"><div class="panel-head"><div><p class="eyebrow">HIỆU QUẢ LINK</p><h3>Link nổi bật</h3></div><button class="text-btn" data-go="links">Kho link</button></div><div class="product"><div class="product-icon">C</div><div><b>Cáp sạc Type-C 100W</b><p>284 lượt nhấp · 8 đơn</p></div><strong>420K</strong></div><div class="product"><div class="product-icon">O</div><div><b>Ốp chống sốc MagSafe</b><p>196 lượt nhấp · 6 đơn</p></div><strong>315K</strong></div></article></section>
+    </div>
+
+    <div class="view" id="links"><section class="section-head"><div><p class="eyebrow">KHO LINK AFFILIATE</p><h2>Link sản phẩm</h2><p>Tự dán link Shopee Affiliate, hệ thống sẽ chọn link phù hợp khi tạo nội dung.</p></div><button class="primary" id="addLink">+ Thêm link mới</button></section><div class="panel table-wrap"><table><thead><tr><th>Sản phẩm</th><th>Danh mục</th><th>Trạng thái</th><th>Lượt nhấp</th><th>Ưu tiên</th></tr></thead><tbody id="linkTable"><tr><td><b>Cáp sạc Type-C 100W</b><small>shopee.vn/...</small></td><td>Phụ kiện</td><td><span class="badge live">Hoạt động</span></td><td>284</td><td><button class="priority">Cao</button></td></tr><tr><td><b>Ốp chống sốc MagSafe</b><small>shopee.vn/...</small></td><td>Ốp lưng</td><td><span class="badge live">Hoạt động</span></td><td>196</td><td><button class="priority">Cao</button></td></tr><tr><td><b>Kính cường lực 9H</b><small>shopee.vn/...</small></td><td>Phụ kiện</td><td><span class="badge live">Hoạt động</span></td><td>143</td><td><button class="priority">Trung bình</button></td></tr></tbody></table></div></div>
+
+    <div class="view" id="calendar"><section class="section-head"><div><p class="eyebrow">LỊCH NỘI DUNG</p><h2>Kế hoạch tuần này</h2><p>Mục tiêu: 2 nội dung mỗi ngày trên các kênh đã kết nối.</p></div><button class="primary" id="calendarCreate">+ Lên lịch bài đăng</button></section><div class="calendar panel"><div class="days"><span>Thứ 2<br><b>26</b></span><span>Thứ 3<br><b>27</b></span><span class="selected">Thứ 4<br><b>28</b></span><span>Thứ 5<br><b>29</b></span><span>Thứ 6<br><b>30</b></span><span>Thứ 7<br><b>31</b></span><span>CN<br><b>01</b></span></div><div class="schedule-card"><span class="schedule-time">10:30</span><div><b>Mẹo chọn sạc nhanh an toàn cho điện thoại</b><p>Video ngắn · Facebook, Instagram</p></div><span class="badge draft">Chờ duyệt</span></div><div class="schedule-card"><span class="schedule-time">19:30</span><div><b>Top 5 ốp lưng chống sốc đáng mua</b><p>Carousel · Facebook, Threads</p></div><span class="badge scheduled">Đã lên lịch</span></div></div></div>
+
+    <div class="view" id="create"><section class="section-head"><div><p class="eyebrow">TRÌNH TẠO NỘI DUNG</p><h2>Tạo bài đăng affiliate</h2><p>Nhập brief, chọn kênh và để iTECH tạo cấu trúc nội dung.</p></div></section><form class="composer panel" id="contentForm"><label>Chủ đề hoặc brief<textarea required placeholder="Ví dụ: So sánh cáp sạc nhanh cho iPhone và Android, giọng điệu gần gũi..."></textarea></label><div class="form-grid"><label>Loại nội dung<select><option>Video ngắn</option><option>Ảnh / Carousel</option><option>Bài viết</option></select></label><label>Link sản phẩm<select><option>Cáp sạc Type-C 100W</option><option>Ốp chống sốc MagSafe</option><option>Kính cường lực 9H</option></select></label></div><fieldset><legend>Kênh xuất bản</legend><label><input type="checkbox" checked> Facebook</label><label><input type="checkbox" checked> Instagram</label><label><input type="checkbox"> Threads</label></fieldset><button class="primary" type="submit">Tạo bản nháp</button></form><div class="generated panel" id="generated"><p class="eyebrow green">BẢN NHÁP ĐÃ TẠO</p><h3>Đừng chọn cáp sạc chỉ vì giá rẻ</h3><p>Cáp sạc tốt giúp điện thoại nạp nhanh, ổn định và giảm rủi ro chai pin. Với nhu cầu sạc laptop, máy tính bảng hoặc điện thoại hiện nay, một chiếc cáp Type-C công suất cao là lựa chọn đáng cân nhắc.</p><p><b>CTA:</b> Xem sản phẩm trong kho link để chọn mẫu phù hợp.</p></div></div>
+
+    <div class="view" id="reports"><section class="section-head"><div><p class="eyebrow">BÁO CÁO</p><h2>Hiệu quả affiliate</h2><p>Dữ liệu mẫu dành cho giai đoạn staging.</p></div><button class="ghost">Xuất báo cáo</button></section><div class="stats"><article><p>Doanh thu đơn hàng</p><strong>24,8M</strong><span class="up">+12.6%</span></article><article><p>Hoa hồng</p><strong>1,86M</strong><span class="up">+12.6%</span></article><article><p>Tỷ lệ chuyển đổi</p><strong>2,8%</strong><span class="up">+0.4%</span></article></div><div class="panel chart"><div class="panel-head"><div><p class="eyebrow">7 NGÀY GẦN ĐÂY</p><h3>Lượt nhấp theo ngày</h3></div><b>1.284 lượt</b></div><div class="bars"><i style="height:38%"></i><i style="height:55%"></i><i style="height:43%"></i><i style="height:74%"></i><i style="height:64%"></i><i style="height:91%"></i><i style="height:80%"></i></div><div class="bar-labels"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span></div></div></div>
+  </section>
+</main>
+<div class="modal" id="modal"><div class="modal-card"><button class="close" id="closeModal">×</button><p class="eyebrow green">THÊM VÀO KHO</p><h2>Link affiliate mới</h2><form id="linkForm"><label>Tên sản phẩm<input id="productName" required placeholder="Ví dụ: Tai nghe Bluetooth"></label><label>Link Shopee Affiliate<input required placeholder="https://shopee.vn/..."></label><label>Danh mục<select><option>Phụ kiện</option><option>Ốp lưng</option><option>Thiết bị điện tử</option></select></label><button class="primary" type="submit">Lưu link</button></form></div></div>
+<script>
+const views=document.querySelectorAll('.view');const navs=document.querySelectorAll('.nav');const title=document.getElementById('pageTitle');const names={dashboard:'Tổng quan',links:'Kho link',calendar:'Lịch nội dung',create:'Tạo nội dung',reports:'Báo cáo'};function go(id){views.forEach(v=>v.classList.toggle('active',v.id===id));navs.forEach(n=>n.classList.toggle('active',n.dataset.view===id));title.textContent=names[id];window.scrollTo({top:0,behavior:'smooth'});document.getElementById('sidebar').classList.remove('open')}navs.forEach(n=>n.onclick=()=>go(n.dataset.view));document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));['quickCreate','heroCreate','calendarCreate'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>go('create')));document.getElementById('menuBtn').onclick=()=>document.getElementById('sidebar').classList.toggle('open');const modal=document.getElementById('modal');document.getElementById('addLink').onclick=()=>modal.classList.add('show');document.getElementById('closeModal').onclick=()=>modal.classList.remove('show');modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show')});document.getElementById('linkForm').onsubmit=e=>{e.preventDefault();const name=document.getElementById('productName').value;document.getElementById('linkTable').insertAdjacentHTML('beforeend',`<tr><td><b>${name}</b><small>shopee.vn/...</small></td><td>Phụ kiện</td><td><span class="badge live">Hoạt động</span></td><td>0</td><td><button class="priority">Trung bình</button></td></tr>`);document.getElementById('linkCount').textContent=Number(document.getElementById('linkCount').textContent)+1;modal.classList.remove('show');e.target.reset()};document.getElementById('contentForm').onsubmit=e=>{e.preventDefault();document.getElementById('generated').classList.add('show');document.getElementById('generated').scrollIntoView({behavior:'smooth',block:'nearest'})};
+</script>
 </body>
 </html>
